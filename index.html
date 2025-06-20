@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sauna Price Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+      text-align: center;
+    }
+    h2 {
+      font-size: 24px;
+    }
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      justify-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .option {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+      background: #fff;
+      width: 200px;
+    }
+    .option.selected {
+      border-color: #00b894;
+      transform: scale(1.05);
+    }
+    .option img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+    .option span {
+      display: block;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+    #total {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Sauna Price Calculator</h2>
+  <p><strong>Base price: €1750</strong></p>
+
+  <div id="options-container" class="option-grid"></div>
+
+  <div id="total">Total price: €1750</div>
+
+  <script>
+    const basePrice = 1750;
+    let selectedOptions = new Set();
+
+    const options = [
+      {
+        id: "heater",
+        name: "Sauna heater",
+        price: 550,
+        image: "https://content2.rozetka.com.ua/goods/images/big/369510033.jpg",
+      },
+      {
+        id: "alder",
+        name: "Therm alder wood interior",
+        price: 300,
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ08Udza-XOajJi3pOX1y95pMklhq2Y92k6qw&s",
+      },
+      {
+        id: "floorboards",
+        name: "Floorboards instead of plank",
+        price: 50,
+        image: "https://vendor-stroy.com.ua/files/polovaya.1.jpg",
+      },
+      {
+        id: "coating",
+        name: "Floor coating",
+        price: 30,
+        image: "https://klfz.com.ua/Media/shop-13883/KLF%20zavod/Statti/kraska-dlya-derevyanogo-pola.jpg",
+      },
+      {
+        id: "shingles",
+        name: "Shingle mosaic",
+        price: 200,
+        image: "https://centrpol.com.ua/image/cache/catalog/tovari/mozaika/3d/Polsha/quadromini_3-500x400.jpg",
+      },
+      {
+        id: "window",
+        name: "Panoramic window",
+        price: 200,
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxGFM1TU8ItBtzLCjefrnPTiT_HBkHD7HSPA&s",
+      },
+      {
+        id: "juniper",
+        name: "Juniper panel 100x50cm",
+        price: 100,
+        image: "https://images.prom.ua/4305765029_w200_h200_spily-mozhzhevelnika-dlya.jpg",
+      },
+      {
+        id: "quartzite",
+        name: "Raspberry quartzite stones",
+        price: 70,
+        image: "https://www.teplodar.in.ua/content/images/19/400x400l50nn0/18921397365697.jpeg",
+      },
+      {
+        id: "ventilation",
+        name: "Ventilation system",
+        price: 60,
+        image: "https://images.prom.ua/5105156816_w0_h430_zadvizhka-dlya-sauny.jpg",
+      },
+      {
+        id: "oil",
+        name: "Sauna oil coating for wood",
+        price: 90,
+        image: "https://baltresto.com/wp-content/uploads/2020/09/photo-4-colorless-oil-for-sauna-benches%E2%80%93supi-laudesuoja.jpg",
+      },
+    ];
+
+    function renderOptions() {
+      const container = document.getElementById("options-container");
+
+      options.forEach((opt, index) => {
+        const div = document.createElement("div");
+        div.className = "option";
+        div.innerHTML = `
+          <img src="${opt.image}" alt="${opt.name}">
+          <span>${opt.name}<br>(+€${opt.price})</span>
+        `;
+        div.addEventListener("click", () => {
+          if (selectedOptions.has(index)) {
+            selectedOptions.delete(index);
+            div.classList.remove("selected");
+          } else {
+            selectedOptions.add(index);
+            div.classList.add("selected");
+          }
+          updateTotal();
+        });
+        container.appendChild(div);
+      });
+    }
+
+    function updateTotal() {
+      let total = basePrice;
+      selectedOptions.forEach(index => {
+        total += options[index].price;
+      });
+      document.getElementById("total").textContent = `Total price: €${total}`;
+    }
+
+    renderOptions();
+    updateTotal();
+  </script>
+</body>
+</html>

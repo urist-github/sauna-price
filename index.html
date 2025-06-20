@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sauna Price Calculator</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       background: #f9f9f9;
-      padding: 20px;
+      padding: 10px;
+      margin: 0;
     }
     h2 {
       margin-bottom: 10px;
@@ -18,7 +19,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 16px;
       max-width: 1000px;
       margin: 20px auto;
     }
@@ -27,8 +28,9 @@
       border-radius: 10px;
       padding: 10px;
       cursor: pointer;
-      width: 180px;
+      width: 160px;
       background: white;
+      transition: 0.2s;
     }
     .option.selected {
       border-color: #4CAF50;
@@ -47,7 +49,8 @@
     table {
       margin: 20px auto;
       border-collapse: collapse;
-      width: 60%;
+      width: 90%;
+      max-width: 600px;
     }
     table, th, td {
       border: 1px solid #ccc;
@@ -58,6 +61,24 @@
     }
     th {
       background-color: #f0f0f0;
+    }
+    #copy-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      .option {
+        width: 45%;
+        padding: 6px;
+      }
+      .option img {
+        height: 80px;
+      }
+      table, th, td {
+        font-size: 13px;
+      }
     }
   </style>
 </head>
@@ -76,6 +97,9 @@
     </thead>
     <tbody id="selected-table"></tbody>
   </table>
+
+  <button id="copy-btn" onclick="copyLink()">Copy link to this configuration</button>
+  <p id="copied" style="color: green; display: none;">Link copied!</p>
 
   <script>
     const basePrice = 1750;
@@ -105,7 +129,7 @@
         name: "Bluetooth speaker for sauna",
         price: 120,
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSafyovtPdPQV49vnabq3ZJmuog1T0UIovlkA&s",
-      },	
+      },
       {
         id: "floorboards",
         name: "Floorboards instead of plank",
@@ -159,6 +183,10 @@
     function renderOptions() {
       const container = document.getElementById("options-container");
       container.innerHTML = "";
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const selectedFromUrl = urlParams.get("options")?.split(",") || [];
+
       options.forEach((opt, index) => {
         const div = document.createElement("div");
         div.className = "option";
@@ -166,6 +194,12 @@
           <img src="${opt.image}" alt="${opt.name}">
           <span>${opt.name}<br>(+€${opt.price})</span>
         `;
+
+        if (selectedFromUrl.includes(opt.id)) {
+          selectedOptions.add(index);
+          div.classList.add("selected");
+        }
+
         div.addEventListener("click", () => {
           if (selectedOptions.has(index)) {
             selectedOptions.delete(index);
@@ -176,7 +210,9 @@
           }
           updateTotal();
           updateTable();
+          updateURL();
         });
+
         container.appendChild(div);
       });
     }
@@ -199,6 +235,22 @@
           <td>${options[index].price}</td>
         `;
         table.appendChild(row);
+      });
+    }
+
+    function updateURL() {
+      const selectedIds = Array.from(selectedOptions).map(index => options[index].id);
+      const newUrl = `${window.location.pathname}?options=${selectedIds.join(",")}`;
+      history.replaceState(null, "", newUrl);
+    }
+
+    function copyLink() {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url).then(() => {
+        document.getElementById("copied").style.display = "inline";
+        setTimeout(() => {
+          document.getElementById("copied").style.display = "none";
+        }, 2000);
       });
     }
 

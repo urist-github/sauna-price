@@ -76,6 +76,19 @@
       border-radius: 8px;
       display: block;
     }
+    .sauna-images {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+    
+    .sauna-images img {
+      width: 30%;
+      border-radius: 8px;
+      object-fit: cover;
+    }
     @media (max-width: 600px) {
       .option {
         width: 45%;
@@ -92,9 +105,11 @@
 </head>
 <body>
   <h2>Sauna Price Calculator(2*2.2m)</h2>
-  <img id="sauna-main-image" src="/sauna-price/images/sauna-main.jpg" alt="Sauna view">
-  <img id="sauna-main-image" src="/sauna-price/images/sauna2.jpg" alt="Sauna view">
-  <img id="sauna-main-image" src="/sauna-price/images/sauna3.jpg" alt="Sauna view">
+  <div class="sauna-images">
+    <img src="/sauna-price/images/sauna-main.jpg" alt="Sauna view">
+    <img src="/sauna-price/images/sauna2.jpg" alt="Sauna view">
+    <img src="/sauna-price/images/sauna3.jpg" alt="Sauna view">
+  </div>
   <p><strong>Base price: €1750</strong></p>
 
 

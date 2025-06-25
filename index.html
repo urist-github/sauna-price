@@ -89,6 +89,17 @@
       border-radius: 8px;
       object-fit: cover;
     }
+
+    #reset-btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
     @media (max-width: 600px) {
       .option {
         width: 45%;
@@ -127,6 +138,8 @@
 
   <button id="copy-btn" onclick="copyLink()">Copy link to this configuration</button>
   <p id="copied" style="color: green; display: none;">Link copied!</p>
+  
+  <button id="reset-btn" onclick="resetOptions()">Clear all options</button>
 
   <script>
     const basePrice = 1750;
@@ -321,6 +334,14 @@
           document.getElementById("copied").style.display = "none";
         }, 2000);
       });
+    }
+
+    function resetOptions() {
+      selectedOptions.clear();
+      renderOptions();
+      updateTotal();
+      updateTable();
+      updateURL();
     }
 
     renderOptions();

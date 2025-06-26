@@ -68,28 +68,6 @@
       font-size: 14px;
       cursor: pointer;
     }
-    #sauna-main-image {
-      max-width: 300px;
-      width: 100%;
-      height: auto;
-      margin: 0 auto 10px;
-      border-radius: 8px;
-      display: block;
-    }
-    .sauna-images {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 15px 0;
-      flex-wrap: wrap;
-    }
-    
-    .sauna-images img {
-      width: 17%;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-
     #reset-btn {
       margin-top: 10px;
       padding: 10px 20px;
@@ -99,6 +77,18 @@
       color: white;
       border: none;
       border-radius: 4px;
+    }
+    .sauna-images {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+      flex-wrap: wrap;
+    }
+    .sauna-images img {
+      width: 17%;
+      border-radius: 8px;
+      object-fit: cover;
     }
     @media (max-width: 600px) {
       .option {
@@ -115,15 +105,15 @@
   </style>
 </head>
 <body>
-  <h2>Sauna Price Calculator(2*2.2m)</h2>
+  <h2>Sauna Price Calculator (2×2.2m)</h2>
+
   <div class="sauna-images">
     <img src="/sauna-price/images/sauna-main.jpg" alt="Sauna view">
     <img src="/sauna-price/images/sauna2.jpg" alt="Sauna view">
     <img src="/sauna-price/images/sauna3.jpg" alt="Sauna view">
   </div>
+
   <p><strong>Base price: €1750</strong></p>
-
-
   <div class="options-grid" id="options-container"></div>
 
   <h3>Total price: €<span id="total">1750</span></h3>
@@ -138,7 +128,7 @@
 
   <button id="copy-btn" onclick="copyLink()">Copy link to this configuration</button>
   <p id="copied" style="color: green; display: none;">Link copied!</p>
-  
+
   <button id="reset-btn" onclick="resetOptions()">Clear all options</button>
 
   <script>
@@ -146,128 +136,40 @@
     let selectedOptions = new Set();
 
     const options = [
-      {
-        id: "heater",
-        name: "Wood-burning sauna heater + glass",
-        price: 600,
-        image: "/sauna-price/images/heater.jpg",
-      },
-      {
-        id: "electro-heater",
-        name: "Electric sauna heater",
-        price: 400,
-        image: "/sauna-price/images/electro-heater.jpg",
-      },
-      {
-        id: "chimney",
-        name: "Stainless steel chimney pipe",
-        price: 80,
-        image: "/sauna-price/images/chimney.jpg",
-      },
-      {
-        id: "blackFacade",
-        name: "Black wood facade",
-        price: 50,
-        image: "/sauna-price/images/blackFacade.jpg",
-      },
-      {
-        id: "aspen",
-        name: "Thermo-Aspen wood interior (walls & ceiling)",
-        price: 300,
-        image: "/sauna-price/images/thermo-aspen-wall.jpg",
-      },
-      {
-        id: "aspen-bench",
-        name: "Thermo-Aspen benches",
-        price: 250,
-        image: "/sauna-price/images/thermo-aspen.jpg",
-      },
-      {
-        id: "thermoash",
-        name: "Thermo Ash Facade",
-        price: 400,
-        image: "/sauna-price/images/thermoash.jpg",
-      },
-      {
-        id: "bluetooth",
-        name: "Bluetooth speaker for sauna",
-        price: 120,
-        image: "/sauna-price/images/bluetooth.jpg",
-      },
-      {
-        id: "floorboards",
-        name: "Floorboards instead of plank",
-        price: 50,
-        image: "/sauna-price/images/floorboards.jpg",
-      },
-      {
-        id: "coating",
-        name: "Floor coating",
-        price: 30,
-        image: "/sauna-price/images/coating.jpg",
-      },
-      {
-        id: "shingles",
-        name: "Shingle mosaic",
-        price: 100,
-        image: "/sauna-price/images/shingles.jpg",
-      },
-      {
-        id: "window",
-        name: "Panoramic window 130x180cm",
-        price: 120,
-        image: "/sauna-price/images/window.jpg",
-      },
-      {
-        id: "juniper",
-        name: "Juniper panel 100x50cm",
-        price: 100,
-        image: "/sauna-price/images/juniper.jpg",
-      },
-      {
-        id: "quartzite",
-        name: "Raspberry quartzite stones",
-        price: 70,
-        image: "/sauna-price/images/quartzite.jpg",
-      },
-      {
-        id: "ventilation",
-        name: "Ventilation system(base)",
-        price: 60,
-        image: "/sauna-price/images/ventilation.jpg",
-      },
-      {
-        id: "ventilation-bastu",
-        name: "Ventilation system BASTU",
-        price: 100,
-        image: "/sauna-price/images/ventilation-bastu.jpg",
-      },
-      {
-        id: "oil",
-        name: "Sauna oil coating for wood",
-        price: 90,
-        image: "/sauna-price/images/oil.jpg",
-      },
-      {
-        id: "falch",
-        name: "Metal seam cladding (roof & facade)",
-        price: 150,
-        image: "/sauna-price/images/falch.jpg",
-      },
-      {
-        id: "totally wood",
-        name: "Full wood cladding on all walls",
-        price: 220,
-        image: "/sauna-price/images/totally-wood.jpg",
-      }
+      { id: "heater", name: "Wood-burning sauna heater + glass", price: 600, image: "/sauna-price/images/heater.jpg" },
+      { id: "electro-heater", name: "Electric sauna heater", price: 400, image: "/sauna-price/images/electro-heater.jpg" },
+      { id: "chimney", name: "Stainless steel chimney pipe", price: 80, image: "/sauna-price/images/chimney.jpg" },
+      { id: "blackFacade", name: "Black wood facade", price: 50, image: "/sauna-price/images/blackFacade.jpg" },
+      { id: "aspen", name: "Thermo-Aspen wood interior (walls & ceiling)", price: 300, image: "/sauna-price/images/thermo-aspen-wall.jpg" },
+      { id: "aspen-bench", name: "Thermo-Aspen benches", price: 250, image: "/sauna-price/images/thermo-aspen.jpg" },
+      { id: "thermoash", name: "Thermo Ash Facade", price: 400, image: "/sauna-price/images/thermoash.jpg" },
+      { id: "bluetooth", name: "Bluetooth speaker for sauna", price: 120, image: "/sauna-price/images/bluetooth.jpg" },
+      { id: "floorboards", name: "Floorboards instead of plank", price: 50, image: "/sauna-price/images/floorboards.jpg" },
+      { id: "coating", name: "Floor coating", price: 30, image: "/sauna-price/images/coating.jpg" },
+      { id: "shingles", name: "Shingle mosaic", price: 100, image: "/sauna-price/images/shingles.jpg" },
+      { id: "window", name: "Panoramic window 130x180cm", price: 120, image: "/sauna-price/images/window.jpg" },
+      { id: "juniper", name: "Juniper panel 100x50cm", price: 100, image: "/sauna-price/images/juniper.jpg" },
+      { id: "quartzite", name: "Raspberry quartzite stones", price: 70, image: "/sauna-price/images/quartzite.jpg" },
+      { id: "ventilation", name: "Ventilation system (base)", price: 60, image: "/sauna-price/images/ventilation.jpg" },
+      { id: "ventilation-bastu", name: "Ventilation system BASTU", price: 100, image: "/sauna-price/images/ventilation-bastu.jpg" },
+      { id: "oil", name: "Sauna oil coating for wood", price: 90, image: "/sauna-price/images/oil.jpg" },
+      { id: "falch", name: "Metal seam cladding (roof & facade)", price: 150, image: "/sauna-price/images/falch.jpg" },
+      { id: "totally wood", name: "Full wood cladding on all walls", price: 220, image: "/sauna-price/images/totally-wood.jpg" }
     ];
+
+    // === Load from URL only once on page load ===
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedFromUrl = urlParams.get("options")?.split(",") || [];
+    selectedFromUrl.forEach(id => {
+      const index = options.findIndex(opt => opt.id === id);
+      if (index !== -1) {
+        selectedOptions.add(index);
+      }
+    });
 
     function renderOptions() {
       const container = document.getElementById("options-container");
       container.innerHTML = "";
-
-      const urlParams = new URLSearchParams(window.location.search);
-      const selectedFromUrl = urlParams.get("options")?.split(",") || [];
 
       options.forEach((opt, index) => {
         const div = document.createElement("div");
@@ -277,8 +179,7 @@
           <span>${opt.name}<br>(+€${opt.price})</span>
         `;
 
-        if (selectedFromUrl.includes(opt.id)) {
-          selectedOptions.add(index);
+        if (selectedOptions.has(index)) {
           div.classList.add("selected");
         }
 
@@ -338,10 +239,10 @@
 
     function resetOptions() {
       selectedOptions.clear();
-      renderOptions();
       updateTotal();
       updateTable();
       updateURL();
+      renderOptions();
     }
 
     renderOptions();

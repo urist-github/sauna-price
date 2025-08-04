@@ -113,10 +113,9 @@
     <img src="/sauna-price/images/sauna3.jpg" alt="Sauna view">
   </div>
 
-  <p><strong>Base price: €1750</strong></p>
   <div class="options-grid" id="options-container"></div>
 
-  <h3>Total price: €<span id="total">1750</span></h3>
+  <h3>Total option price: €<span id="total">0</span></h3>
 
   <h3>Selected Options</h3>
   <table>
@@ -132,7 +131,7 @@
   <button id="reset-btn" onclick="resetOptions()">Clear all options</button>
 
   <script>
-    const basePrice = 1750;
+    const basePrice = 0;
     let selectedOptions = new Set();
 
     const options = [
@@ -254,3 +253,4 @@
   </script>
 </body>
 </html>
+
